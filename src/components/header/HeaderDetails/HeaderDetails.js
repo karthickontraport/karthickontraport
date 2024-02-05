@@ -4,12 +4,14 @@ import TableViewIcon from "@mui/icons-material/TableView";
 import GridViewIcon from "@mui/icons-material/GridView";
 import style from "./HeaderDetails.module.css";
 
-const HeaderDetails = ({ handleViewChange, currentView }) => {
+const HeaderDetails = ({ handleViewChange, currentView, count }) => {
   return (
     <Container alignBox="row" className={style.Container} align="vertical">
       <Box flexible className={style.head}>
         Contacts
       </Box>
+
+      {count && <div className={style.count}>Total Contacts: {count}</div>}
       <Box>
         <Container alignBox="row" align="vertical">
           <Box className={style.viewtxt}>View :</Box>

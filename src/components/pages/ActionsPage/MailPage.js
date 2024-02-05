@@ -1,7 +1,6 @@
 import React from "react";
 import ActionsModel from "../../common/ActionsModel/ActionsModel";
 import MailModelBox from "../../common/MailModelBox/MailModelBox";
-import style from "./Common.module.css";
 
 const EventPage = ({ onClose }) => {
   return (

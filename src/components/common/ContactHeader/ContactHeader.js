@@ -16,6 +16,8 @@ const ContactHeader = (props) => {
     className,
     buttonText,
     handleMailClick,
+    needBackView,
+    needQuickView,
   } = props;
 
   return (
@@ -26,9 +28,12 @@ const ContactHeader = (props) => {
     >
       <Box flexible>
         <Container alignBox="row" style={{ gap: "15px" }} align="vertical">
-          <IconButton onClick={handleBackClick} title="Click to go back">
-            <ArrowLeftOutlined />
-          </IconButton>
+          {needBackView && (
+            <IconButton onClick={handleBackClick} title="Click to go back">
+              <ArrowLeftOutlined />
+            </IconButton>
+          )}
+
           <div className={style.text}>{emailtext}</div>
         </Container>
       </Box>
@@ -40,11 +45,13 @@ const ContactHeader = (props) => {
         </Box>
       )}
 
-      <Box>
-        <IconButton onClick={handleQuickview} title="Quick View">
-          <QuestionAnswerIcon />
-        </IconButton>
-      </Box>
+      {needQuickView && (
+        <Box>
+          <IconButton onClick={handleQuickview} title="Quick View">
+            <QuestionAnswerIcon />
+          </IconButton>
+        </Box>
+      )}
     </Container>
   );
 };
@@ -55,10 +62,14 @@ ContactHeader.propTypes = {
   handleBackClick: PropTypes.func,
   buttonText: PropTypes.string,
   handleMailClick: PropTypes.func,
+  needBackView: PropTypes.bool,
+  needQuickView: PropTypes.bool,
 };
 
 ContactHeader.defaultProps = {
   emailtext: `karthick ${"(karthick@goleads.com)"}`,
+  needBackView: true,
+  needQuickView: true,
 };
 
 export default ContactHeader;

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../../components/actions/authAction";

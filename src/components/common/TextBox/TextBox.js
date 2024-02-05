@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Container, Box } from "../../common/Layout";
-import DoneIcon from "@mui/icons-material/Done";
 import Tooltip from "@mui/material/Tooltip";
 import Spinner from "react-bootstrap/Spinner";
 import style from "./TextBox.module.css";

@@ -1,0 +1,69 @@
+.comWid {
+  width: 30%;
+}
+.actionIcons {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  visibility: hidden;
+}
+.hed {
+  height: 3.525rem;
+  margin: 0.938rem 0;
+  padding: 0 2rem;
+}
+.wraper {
+  padding: 0 1rem;
+}
+
+.actionIcons span {
+  cursor: pointer;
+  color: #1677ff;
+}
+.middle {
+  position: relative;
+  padding-right: 4.375rem;
+  margin-bottom: 0.938rem;
+}
+.middle:last-child {
+  margin: 0;
+}
+.middle:hover .actionIcons {
+  visibility: visible;
+}
+.labels {
+  padding: 0 4.375rem 0.875rem 1rem;
+}
+.gtext {
+  margin-bottom: 5px;
+}
+.footer {
+  height: 50px;
+  border-top: 1px solid rgba(5, 5, 5, 0.06);
+}
+.count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}
+.condition {
+  padding-left: 1rem;
+}
+.desc {
+  padding: 1rem 2rem;
+  border-top: 1px solid rgba(5, 5, 5, 0.06);
+  border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+  margin: 1rem 0;
+  color: #1677ff;
+}
+.info {
+  margin-right: 5px;
+}
+/* .newbtn:focus-within {
+  color: #1677ff;
+}
+.newbtn:hover span {
+  color: #1677ff;
+} */

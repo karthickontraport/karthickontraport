@@ -1,5 +1,4 @@
-// SelectField.js
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { Select } from "antd";
@@ -14,12 +13,13 @@ const RefLoginField = (props) => {
   const [isChanged, setIsChanged] = useState(false);
   const [isSaveVisible, setIsSaveVisible] = useState(false);
 
-  console.log('login users', data);
+  console.log("login users", data);
 
   useEffect(() => {
-    dispatch(fetchRefData());
-  }, [dispatch]);
-
+    if (!data || data.length === 0) {
+      dispatch(fetchRefData());
+    }
+  }, [dispatch, data]);
   const handleSaveClick = () => {
     handleSave(value);
     setIsSaveVisible(false);

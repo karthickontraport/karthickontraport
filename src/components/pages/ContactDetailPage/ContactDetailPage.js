@@ -1,6 +1,6 @@
 // ContactDetailPage.js
 
-import React, { useState, useEffect, useCallback,useMemo } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Modal, Button } from "antd";
@@ -22,7 +22,8 @@ import QuickViewPage from "../QuickViewPage";
 import TaskPage from "../ActionsPage/TaskPage";
 import EventPage from "../ActionsPage/EventPage";
 import MailPage from "../ActionsPage/MailPage";
-import CustomTable from "../../common/CustomTable/CustomTable";
+import TaskActions from "../../common/TaskActions/TaskActions";
+import EventActions from "../../common/EventActions/EventActions";
 import style from "./ContactDetailPage.module.css";
 
 const ContactDetailPage = (props) => {
@@ -247,13 +248,12 @@ const ContactDetailPage = (props) => {
     setShowMailActions(false);
   };
 
-
-  const taskData = JSON.parse(localStorage.getItem('taskData')) || {};
+  const taskData = JSON.parse(localStorage.getItem("taskData")) || {};
+  const eventData = JSON.parse(localStorage.getItem("eventData")) || {};
 
   // Extract data for the current customer ID
   const currentCustomerIdData = taskData[customerId] || [];
-  
-  console.log('taskData',currentCustomerIdData)
+  const currentCustomerIdEventData = eventData[customerId] || [];
 
   const columns = [
     { title: "Assignee", dataIndex: "assignee", key: "assignee" },
@@ -264,13 +264,27 @@ const ContactDetailPage = (props) => {
     { title: "Date Complete", dataIndex: "DateComplete", key: "DateComplete" },
     { title: "Date Due", dataIndex: "dueDate", key: "dueDate" },
   ];
+  const eventColumns = [
+    { title: "Title", dataIndex: "title", key: "title" },
+    { title: "StartEnd", dataIndex: "startEnd", key: "startEnd" },
+    // { title: "Details", dataIndex: "details", key: "details" },
+    {
+      title: "Attending",
+      dataIndex: "attending",
+      key: "attending",
+      render: (text) => (
+        <span style={{ color: "#198754", fontWeight: "500" }}>{text}</span>
+      ),
+    },
+    { title: "Modify Event", dataIndex: "modify event", key: "modify event" },
+  ];
 
   const rowSelection = {
     selectedRowKeys,
     onChange: (selectedKeys) => {
       setSelectedRowKeys(selectedKeys);
     },
-    showSelectAll: false
+    showSelectAll: false,
   };
 
   return (
@@ -447,47 +461,57 @@ const ContactDetailPage = (props) => {
           </Box>
           <Box>
             <ContactBox
-              actionBtnText="Add Tasks"
+              actionBtnText="Add New Task"
               handleShowNoteModel={handleShowAction}
+              customChildren={<TaskActions />}
               heading="Task"
               scroll="vertical"
               className={style.noteContainer}
-            > {currentCustomerIdData.length > 0 ? (
-              <Table
-                columns={columns}
-                dataSource={currentCustomerIdData}
-                  rowKey={(record) => record.subject} 
+            >
+              {currentCustomerIdData.length > 0 ? (
+                <Table
+                  columns={columns}
+                  dataSource={currentCustomerIdData}
+                  rowKey={(record) => record.subject}
                   pagination={false}
                   rowSelection={rowSelection}
-              />
-            ) : (
-              <Empty
-                description={
-                  <span style={{ fontSize: "16px", color: "#bababa" }}>
-                    No Task available for this contact.
-                  </span>
-                }
-              />
-            )}
+                />
+              ) : (
+                <Empty
+                  description={
+                    <span style={{ fontSize: "16px", color: "#bababa" }}>
+                      No Task available for this contact.
+                    </span>
+                  }
+                />
+              )}
             </ContactBox>
           </Box>
 
-
           <Box>
             <ContactBox
-              actionBtnText="Add Calendar Event"
+              actionBtnText="Add New Event"
               handleShowNoteModel={handleEventShowAction}
+              customChildren={<EventActions />}
               heading="Calendar"
               scroll="vertical"
               className={style.noteContainer}
             >
-              <Empty
-                description={
-                  <span style={{ fontSize: "16px", color: "#bababa" }}>
-                    There are no events available for this contact.
-                  </span>
-                }
-              />
+              {currentCustomerIdEventData.length > 0 ? (
+                <Table
+                  columns={eventColumns}
+                  dataSource={currentCustomerIdEventData}
+                  pagination={false}
+                />
+              ) : (
+                <Empty
+                  description={
+                    <span style={{ fontSize: "16px", color: "#bababa" }}>
+                      There are no events available for this contact.
+                    </span>
+                  }
+                />
+              )}
             </ContactBox>
           </Box>
         </Container>

@@ -1,9 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Container, Box } from "../Layout";
-import SearchIcon from "@mui/icons-material/Search";
 import { Button, Flex } from "antd";
-import IconButton from "../IconButton/IconButton";
 import style from "./ContactBox.module.css";
 
 const ContactBox = ({
@@ -17,6 +15,7 @@ const ContactBox = ({
   onDelete,
   className,
   deleteLoding,
+  customChildren,
 }) => {
   return (
     <Container
@@ -51,6 +50,8 @@ const ContactBox = ({
                   </Flex>
                 </Box>
               )}
+
+              <Box>{customChildren}</Box>
             </Container>
           </Box>
           {/* <Box>
@@ -71,6 +72,7 @@ ContactBox.propTypes = {
   heading: PropTypes.string.isRequired,
   actionBtnText: PropTypes.string,
   children: PropTypes.node,
+  customChildren: PropTypes.node,
   needSelect: PropTypes.bool.isRequired,
   handleShowNoteModel: PropTypes.func,
   onEdit: PropTypes.func,

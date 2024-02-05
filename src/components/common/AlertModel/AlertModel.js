@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 
 const AlertModel = ({
   title,

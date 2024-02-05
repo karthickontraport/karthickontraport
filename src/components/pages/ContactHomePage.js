@@ -8,7 +8,8 @@ import React, {
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Empty } from "antd";
+import { Empty, Button } from "antd";
+import { CloseOutlined } from "@ant-design/icons";
 import { Container, Box } from "../common/Layout";
 import HeaderDetails from "../header/HeaderDetails/HeaderDetails";
 import PageHeader from "../header/PageHeader/PageHeader";
@@ -16,6 +17,7 @@ import { fetchData } from "../actions/contactListAction";
 import { Result } from "antd";
 import LoadingSpin from "../common/Loading/Loading";
 import Skeleton from "@mui/material/Skeleton";
+import CriteriaPage from "./CriteriaPage/CriteriaPage";
 import style from "./common.module.css";
 
 const CustomTable = lazy(() => import("../common/CustomTable/CustomTable"));
@@ -30,6 +32,23 @@ const ContactHomePage = ({ handleEdit }) => {
   const dispatch = useDispatch();
   const { loading, error, success, data } = useSelector((state) => state.data);
   const navigate = useNavigate();
+
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [criteriaPageTitle, setCriteriaPageTitle] = useState(
+    "ADD GROUP AND CONDITIONS"
+  );
+  const [selectedRows, setSelectedRows] = useState([]);
+  const handleDrawerClose = () => {
+    setDrawerVisible(false);
+  };
+  const handleDrawerOpen = () => {
+    setDrawerVisible(true);
+    setCriteriaPageTitle("ADD GROUP AND CONDITIONS");
+  };
+  const handleEditGroup = () => {
+    setDrawerVisible(true);
+    setCriteriaPageTitle("EDIT GROUP AND CONDITIONS");
+  };
 
   useEffect(() => {
     if (!data || data.length === 0) {
@@ -161,13 +180,16 @@ const ContactHomePage = ({ handleEdit }) => {
         <HeaderDetails
           handleViewChange={handleViewChange}
           currentView={currentView}
+          count={dataCount}
         />
       </Box>
       <Box className={style.gap}>
         <PageHeader
           onClick={handleAddForm}
           onChange={handleFilterChange}
-          count={dataCount}
+          handleAddGroup={handleDrawerOpen}
+          handleEditGroup={handleEditGroup}
+          needActions={selectedRows.length > 0}
         />
       </Box>
       <Box flexible scroll="vertical" className={style.bg}>
@@ -194,6 +216,19 @@ const ContactHomePage = ({ handleEdit }) => {
                   data={filteredData}
                   loading={loading}
                   onRowClick={onRowClick}
+                  rowSelection={{
+                    type: "checkbox",
+                    onSelect: (record, selected, selectedRows) => {
+                      const { CustomerID, Name, EMail } = record;
+                      setSelectedRows(selectedRows);
+                      localStorage.setItem("currentCustomerID", CustomerID);
+                      localStorage.setItem("Name", Name);
+                      localStorage.setItem("EMail", EMail);
+                    },
+                    hideSelectAll: false,
+                    columnWidth: 50,
+                  }}
+                  rowKey="CustomerID"
                 />
               </Suspense>
             )}
@@ -237,6 +272,12 @@ const ContactHomePage = ({ handleEdit }) => {
           </>
         )}
       </Box>
+      <CriteriaPage
+        title={criteriaPageTitle}
+        onClose={handleDrawerClose}
+        visible={drawerVisible}
+        extra={<Button onClick={handleDrawerClose} icon={<CloseOutlined />} />}
+      />
     </Container>
   );
 };

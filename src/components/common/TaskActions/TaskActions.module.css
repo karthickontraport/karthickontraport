@@ -1,0 +1,13 @@
+.selectContainer {
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  position: relative;
+}
+.selectContainer:focus-within {
+  border-color: #1677ff;
+}
+.customtxt {
+  font-size: 14px;
+  padding-left: 10px;
+  text-wrap: nowrap;
+}

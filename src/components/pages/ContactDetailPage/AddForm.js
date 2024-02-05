@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Container, Box } from "../../common/Layout";
 import { Button, Flex, Modal, Checkbox } from "antd";
 import TextBox from "../../common/TextBox/TextBox";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import SelectField from "../../common/SelectField/SelectField";
 import BusinessTypeField from "../../common/BusinessTypeField/BusinessTypeField";
 import IndustryTypeField from "../../common/IndustryTypeField/IndustryTypeField";

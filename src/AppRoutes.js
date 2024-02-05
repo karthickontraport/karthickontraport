@@ -8,6 +8,7 @@ import ContactDetailPage from "./components/pages/ContactDetailPage/ContactDetai
 import ContactHomePage from "./components/pages/ContactHomePage";
 import ParcasePage from "./components/pages/ParcasePage/ParcasePage";
 import AddForm from "./components/pages/ContactDetailPage/AddForm";
+import CalendarPage from "./components/pages/CalendarPage/CalendarPage";
 import { fetchData } from "./components/actions/contactListAction";
 
 const NotFoundPage = () => {
@@ -35,7 +36,6 @@ const NotFoundPage = () => {
 
 const AppRoutes = () => {
   const navigate = useNavigate();
-
   const handleBackClick = async () => {
     try {
       const data = await fetchData();
@@ -73,6 +73,7 @@ const AppRoutes = () => {
           path="contactDetailes/:id"
           element={<ContactDetailPage handleBackClick={handleBackClick} />}
         />
+        <Route path="calendar" element={<CalendarPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

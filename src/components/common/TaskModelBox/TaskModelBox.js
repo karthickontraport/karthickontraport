@@ -63,7 +63,7 @@ const TaskModelBox = ({ onUpdateData }) => {
         label: "Christian Jones",
       },
     ];
-    console.log("selectedAssignee", selectedAssignee);
+
     return (
       <Select
         showSearch

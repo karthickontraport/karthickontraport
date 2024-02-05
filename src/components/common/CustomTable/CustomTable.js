@@ -3,7 +3,14 @@ import { Table } from "antd";
 import { AutoSizer } from "react-virtualized";
 import style from "./CustomTable.module.css";
 
-const CustomTable = ({ columns, rowKey, data, loading, onRowClick }) => {
+const CustomTable = ({
+  columns,
+  rowKey,
+  data,
+  loading,
+  onRowClick,
+  rowSelection,
+}) => {
   const [tableHeight, setTableHeight] = useState(window.innerHeight - 350);
 
   const handleResize = () => {
@@ -33,16 +40,16 @@ const CustomTable = ({ columns, rowKey, data, loading, onRowClick }) => {
   // Ensure data has at least 50 rows
   const extendedData =
     data.length < 50 ? [...data, ...Array(50 - data.length).fill({})] : data;
-
   return (
     <div>
       <AutoSizer style={{ width: "auto", height: tableHeight }}>
         {({ height, width }) => (
           <Table
             virtual
+            rowSelection={rowSelection}
             bordered
+            rowKey={rowKey}
             dataSource={extendedData}
-            rowKey={(record) => record[rowKey]}
             pagination={{
               position: ["bottomCenter"],
               showSizeChanger: true,

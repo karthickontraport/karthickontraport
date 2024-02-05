@@ -29,3 +29,6 @@ li {
 .ql-container.ql-snow {
   position: initial;
 }
+.ant-drawer-body {
+  padding: 0 !important;
+}

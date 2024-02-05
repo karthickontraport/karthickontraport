@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import ActionsModel from "../../common/ActionsModel/ActionsModel";
 import TaskModelBox from "../../common/TaskModelBox/TaskModelBox";
-import style from "./Common.module.css";
 
 const TaskPage = ({ onClose }) => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
