@@ -13,7 +13,7 @@ export default function Navbar() {
       <Box>
         <ul>
           <li>
-            <Link to="/contacts">Contacts</Link>
+            <Link to="/contacts">Contact Information</Link>
             <Link to="/parchace">parchace</Link>
           </li>
         </ul>

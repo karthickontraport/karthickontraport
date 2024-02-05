@@ -14,7 +14,7 @@
 }
 .selected {
   color: #fff;
-  background: #0e92e4;
+  background: #1677ff;
 }
 .Container {
   padding: 10px 20px 10px;
@@ -24,8 +24,10 @@
 }
 .head {
   font-size: 20px;
+  font-weight: bold;
 }
 .viewtxt {
   margin-right: 5px;
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: bold;
 }

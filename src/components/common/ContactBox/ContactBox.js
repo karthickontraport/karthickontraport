@@ -2,18 +2,29 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Container, Box } from "../Layout";
 import SearchIcon from "@mui/icons-material/Search";
-import Button from "@mui/material/Button";
-import Form from "react-bootstrap/Form";
+import { Button, Flex } from "antd";
 import IconButton from "../IconButton/IconButton";
 import style from "./ContactBox.module.css";
 
-const ContactBox = (props) => {
-  const { heading, actionBtnText, children, needSelect, handleAddNote } = props;
-
+const ContactBox = ({
+  heading,
+  actionBtnText,
+  children,
+  needSelect,
+  handleShowNoteModel,
+  scroll,
+  onEdit,
+  onDelete,
+  className,
+  deleteLoding,
+}) => {
   return (
-    <Container alignBox="column" className={style.Container}>
+    <Container
+      alignBox="column"
+      className={`${style.Container} ${className && className}`}
+    >
       <Box className={style.header}>
-        <Container alignBox="vertical" align="between">
+        <Container alignBox="row" align="between">
           <Box>
             <Container
               alignBox="row"
@@ -22,35 +33,34 @@ const ContactBox = (props) => {
             >
               <Box className={style.heading}>{heading}</Box>
 
-              {actionBtnText ? (
+              {actionBtnText && (
                 <Box>
-                  <Button variant="contained" onClick={handleAddNote}>
+                  <Button type="primary" onClick={handleShowNoteModel}>
                     {actionBtnText}
                   </Button>
                 </Box>
-              ) : (
-                ""
               )}
 
               {needSelect && (
                 <Box>
-                  <Form.Select aria-label="Actions">
-                    <option>Actions</option>
-                    <option value="1">Edit</option>
-                    <option value="2">Delete</option>
-                  </Form.Select>
+                  <Flex gap="small">
+                    <Button onClick={onEdit}>Edit</Button>
+                    <Button onClick={onDelete}>
+                      {deleteLoding ? "Deleting..." : "Delete"}
+                    </Button>
+                  </Flex>
                 </Box>
               )}
             </Container>
           </Box>
-          <Box>
+          {/* <Box>
             <IconButton>
               <SearchIcon />
             </IconButton>
-          </Box>
+          </Box> */}
         </Container>
       </Box>
-      <Box flexible className={style.child}>
+      <Box flexible className={style.child} scroll={scroll}>
         {children}
       </Box>
     </Container>
@@ -59,10 +69,14 @@ const ContactBox = (props) => {
 
 ContactBox.propTypes = {
   heading: PropTypes.string.isRequired,
-  actionBtnText: PropTypes.string.isRequired,
+  actionBtnText: PropTypes.string,
   children: PropTypes.node,
   needSelect: PropTypes.bool.isRequired,
-  handleAddNote: PropTypes.func,
+  handleShowNoteModel: PropTypes.func,
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
+  className: PropTypes.string,
+  deleteLoding: PropTypes.bool,
 };
 
 ContactBox.defaultProps = {

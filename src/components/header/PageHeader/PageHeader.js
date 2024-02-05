@@ -1,34 +1,29 @@
 import React from "react";
 import { Container, Box } from "../../common/Layout";
-import TextField from "@mui/material/TextField";
-import SearchIcon from "@mui/icons-material/Search";
-import Button from "@mui/material/Button";
+import { Input, Button } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+
 import style from "./PageHeader.module.css";
 
-const PageHeader = ({ onChange, onClick }) => {
+const PageHeader = ({ onChange, onClick, count }) => {
   return (
     <Container alignBox="row" align="vertical" className={style.Container}>
       <Box flexible>
-        <Button variant="contained" onClick={onClick}>
-          Add Contact
-        </Button>
+        <Container alignBox="row" align="vertical" className={style.heder}>
+          <Button type="primary" onClick={onClick}>
+            New Contact
+          </Button>
+          {count !== "" && <div className={style.count}>Contacts: {count}</div>}
+        </Container>
       </Box>
       <Box>
-        <TextField
-          label=""
-          variant="outlined"
-          placeholder="search Contact"
-          InputProps={{
-            endAdornment: (
-              <SearchIcon sx={{ color: "action.active", marginLeft: 1 }} />
-            ),
-          }}
-          sx={{
-            width: "300px",
-            marginLeft: "10px",
-            "& input": { padding: "10px" }, // Set input padding
-          }}
+        <Input
+          type="text"
+          placeholder="Search Contact"
+          suffix={<SearchOutlined style={{ color: "gray" }} />}
+          size="large"
           onChange={onChange}
+          style={{ width: "18.75rem" }}
         />
       </Box>
     </Container>

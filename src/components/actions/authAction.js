@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_BASE_URL = "https://www.b2bvibe.com/capsapi/";
+const API_BASE_URL = "https://www.goleads.com/capsapi";
 
 export const login = (email, password) => async (dispatch) => {
   dispatch({ type: "LOGIN_REQUEST" });

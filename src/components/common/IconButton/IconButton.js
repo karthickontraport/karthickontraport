@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Tooltip from "@mui/material/Tooltip";
+import { Tooltip } from "antd";
 import { Container } from "../Layout";
 import style from "./IconButton.module.css";
 

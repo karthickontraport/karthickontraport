@@ -4,11 +4,19 @@ import PropTypes from "prop-types";
 import { Container, Box } from "../Layout";
 import IconButton from "../IconButton/IconButton";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { ArrowLeftOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 import style from "./ContactHeader.module.css";
 
 const ContactHeader = (props) => {
-  const { emailtext, handleBackClick, handleQuickview, className } = props;
+  const {
+    emailtext,
+    handleBackClick,
+    handleQuickview,
+    className,
+    buttonText,
+    handleMailClick,
+  } = props;
 
   return (
     <Container
@@ -19,13 +27,21 @@ const ContactHeader = (props) => {
       <Box flexible>
         <Container alignBox="row" style={{ gap: "15px" }} align="vertical">
           <IconButton onClick={handleBackClick} title="Click to go back">
-            <ArrowBackIcon />
+            <ArrowLeftOutlined />
           </IconButton>
           <div className={style.text}>{emailtext}</div>
         </Container>
       </Box>
+      {buttonText && (
+        <Box>
+          <Button type="primary" onClick={handleMailClick}>
+            {buttonText}
+          </Button>
+        </Box>
+      )}
+
       <Box>
-        <IconButton onClick={handleQuickview}>
+        <IconButton onClick={handleQuickview} title="Quick View">
           <QuestionAnswerIcon />
         </IconButton>
       </Box>
@@ -37,6 +53,8 @@ ContactHeader.propTypes = {
   emailtext: PropTypes.string.isRequired,
   handleQuickview: PropTypes.func.isRequired,
   handleBackClick: PropTypes.func,
+  buttonText: PropTypes.string,
+  handleMailClick: PropTypes.func,
 };
 
 ContactHeader.defaultProps = {

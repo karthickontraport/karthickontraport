@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "https://www.b2bvibe.com/capsapi/";
+const API_BASE_URL = "https://www.goleads.com/capsapi/";
 
 export const fetchData = () => async (dispatch) => {
   dispatch({ type: "FETCH_REQUEST" });
@@ -16,7 +16,7 @@ export const fetchData = () => async (dispatch) => {
   }
 
   try {
-    const response = await axios.get(`${API_BASE_URL}/api/client/lists`, {
+    const response = await axios.get(`${API_BASE_URL}api/client/lists`, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         Authorization: `Bearer ${access_token}`,

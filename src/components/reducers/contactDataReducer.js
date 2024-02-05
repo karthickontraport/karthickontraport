@@ -3,19 +3,20 @@ const initialState = {
   success: false,
   error: null,
   data: [],
-  page: 1,
-  hasMore: true,
 };
 
 const contactDataReducer = (state = initialState, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
-      return {
-        ...state,
-        loading: true,
-        success: false,
-        error: null,
-      };
+      // Only set loading to true if it's not already true
+      return state.loading
+        ? state
+        : {
+            ...state,
+            loading: true,
+            success: false,
+            error: null,
+          };
 
     case "FETCH_SUCCESS":
       return {
@@ -23,9 +24,7 @@ const contactDataReducer = (state = initialState, action) => {
         loading: false,
         success: true,
         error: null,
-        data: [...state.data, ...action.payload],
-        page: state.page + 1,
-        hasMore: action.hasMore,
+        data: action.payload,
       };
 
     case "FETCH_ERROR":

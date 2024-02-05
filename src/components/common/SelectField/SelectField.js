@@ -1,52 +1,82 @@
 // SelectField.js
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Button from "react-bootstrap/Button";
 import { Select } from "antd";
 import { Container, Box } from "../Layout";
 import { fetchData } from "../../actions/mediaAction";
+import style from "./SelectField.module.css";
 
-const { Option } = Select;
-
-const SelectField = ({ label }) => {
+const SelectField = ({ label, value, name, onChange, success, handleSave }) => {
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.mediaData);
+  const { data } = useSelector((state) => state.mediaData);
+  const [isChanged, setIsChanged] = useState(false);
+  const [isSaveVisible, setIsSaveVisible] = useState(false);
 
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  const handleSaveClick = () => {
+    handleSave(value);
+    setIsSaveVisible(false);
 
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
+    setTimeout(() => {
+      setIsChanged(false);
+    }, 5000);
+  };
 
+  const handleSelectChange = (selectedValue) => {
+    if (onChange) {
+      onChange(selectedValue);
+    }
+    if (selectedValue !== value) {
+      setIsChanged(true);
+      setIsSaveVisible(true);
+    } else {
+      setIsChanged(false);
+      setIsSaveVisible(false);
+    }
+  };
+  const selectOptions = data.map((item, index) => ({
+    key: index,
+    value: item.mediacode,
+    label: item.mediadesc,
+  }));
+  const filterOption = (input, option) =>
+    (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
   return (
-    <Container isCover={false} style={{ gap: "10px" }}>
-      <Box>{label}</Box>
+    <Container
+      isCover={false}
+      style={{ gap: "10px" }}
+      className={style.Container}
+    >
+      <Box className={style.label}>{label}</Box>
       <Box>
-        <Select
-          showSearch
-          style={{ width: "100%" }}
-          placeholder="Select a media code"
-          optionFilterProp="children"
-          // onChange={(value) => console.log(`selected ${value}`)}
-          // onFocus={() => console.log("focus")}
-          // onBlur={() => console.log("blur")}
-          // onSearch={(val) => console.log("search:", val)}
-          filterOption={(input, option) =>
-            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
-            0
-          }
+        <Container
+          alignBox="row"
+          align="vertical"
+          className={style.filedContainer}
         >
-          {data.map((item) => (
-            <Option key={item.mediacode} value={item.mediacode}>
-              {item.mediadesc}
-            </Option>
-          ))}
-        </Select>
+          <Box>
+            <Select
+              showSearch
+              style={{ width: "250px" }}
+              placeholder="Select a media code"
+              optionFilterProp="children"
+              value={value}
+              name={name}
+              onChange={handleSelectChange}
+              filterOption={filterOption}
+              options={selectOptions}
+            />
+          </Box>
+          {isChanged && isSaveVisible && (
+            <div onClick={handleSaveClick} className={style.btn}>
+              Save
+            </div>
+          )}
+        </Container>
       </Box>
     </Container>
   );

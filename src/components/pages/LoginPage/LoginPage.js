@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../../components/actions/authAction";
 import LoginForm from "../../form/Login/Login";
@@ -39,23 +40,23 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (success && !showSuccess) {
-      toast.success("Login successful!", {
-        position: "top-center",
-        autoClose: 1300,
+      message.success({
+        content: "Login successful!",
+        duration: 3,
       });
       setShowSuccess(true);
-      navigate("/home");
+      navigate("home");
     }
     if (error) {
-      toast.error("Login failed. Please check your credentials.", {
-        position: "top-center",
-        autoClose: 1300,
+      message.error({
+        content: error,
+        duration: 3,
       });
     }
   }, [success, error, showSuccess]);
 
   return (
-    <Container align="both">
+    <Container align="both" className={style.wrap}>
       <Box className={style.container}>
         <LoginForm
           onSubmit={handleSubmit}

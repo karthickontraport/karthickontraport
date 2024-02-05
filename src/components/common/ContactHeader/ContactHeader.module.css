@@ -2,8 +2,9 @@
   border-radius: 5px;
   padding: 10px 20px;
   background-color: #fff;
+  gap: 1rem;
 }
 .text {
-  font-size: 18px;
+  font-size: 16px;
   color: #2b7df7;
 }

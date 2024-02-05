@@ -1,0 +1,39 @@
+.Container {
+  position: relative;
+  /* padding-bottom: 20px; */
+  box-sizing: border-box;
+}
+
+.success,
+.error {
+  color: rgb(6, 130, 6);
+  font-size: 14px;
+  position: absolute;
+  margin: 0;
+  bottom: 0;
+  transition: all 0.3s;
+}
+.success {
+  color: rgb(6, 130, 6);
+}
+.error {
+  color: rgb(128, 42, 3);
+}
+.btn {
+  height: 30px;
+  line-height: 15px;
+  font-size: 14px;
+  transition: all 0.3s;
+  position: absolute;
+  top: 3px;
+  right: 20px;
+  color: #119de9;
+  cursor: pointer;
+}
+.filedContainer {
+  gap: 10px;
+}
+.label {
+  font-size: 14px;
+  color: #9a9a9a;
+}

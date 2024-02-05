@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Table } from "antd";
 import { AutoSizer } from "react-virtualized";
 import style from "./CustomTable.module.css";
 
 const CustomTable = ({ columns, rowKey, data, loading, onRowClick }) => {
+  const [tableHeight, setTableHeight] = useState(window.innerHeight - 350);
+
+  const handleResize = () => {
+    setTableHeight(window.innerHeight - 350);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); // Run only once on component mount
+
   const handleRowClick = (record) => {
     if (onRowClick) {
       onRowClick(record, record[rowKey]);
@@ -16,14 +30,18 @@ const CustomTable = ({ columns, rowKey, data, loading, onRowClick }) => {
     };
   };
 
+  // Ensure data has at least 50 rows
+  const extendedData =
+    data.length < 50 ? [...data, ...Array(50 - data.length).fill({})] : data;
+
   return (
     <div>
-      <AutoSizer style={{ width: "auto" }}>
+      <AutoSizer style={{ width: "auto", height: tableHeight }}>
         {({ height, width }) => (
           <Table
             virtual
             bordered
-            dataSource={data}
+            dataSource={extendedData}
             rowKey={(record) => record[rowKey]}
             pagination={{
               position: ["bottomCenter"],
@@ -34,13 +52,14 @@ const CustomTable = ({ columns, rowKey, data, loading, onRowClick }) => {
               total: data.length,
               spin: loading,
             }}
-            scroll={{ y: (height = "100vh") }}
+            scroll={{ y: height }}
             components={{
               body: {
                 cell: (props) => <td {...props} />,
               },
             }}
             onRow={rowProps}
+            rowClassName={style.even}
           >
             {columns.map((col) => (
               <Table.Column

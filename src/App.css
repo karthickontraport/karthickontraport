@@ -1,9 +1,9 @@
 .App {
   width: 100%;
   height: 100vh;
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
 }
 
 ol,
@@ -12,4 +12,20 @@ li {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+.ql-toolbar.ql-snow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 1px solid #e7e8eb;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+  border: 1px solid #e7e8eb;
+  border-radius: 5px;
+}
+.ql-container.ql-snow {
+  position: initial;
 }

@@ -5,19 +5,23 @@ import styled from "@emotion/styled";
 import style from "./CardView.module.css";
 
 const CardView = ({ data = [], onCardClick }) => {
-  const handleRowClick = (record) => {
+  const handleRowClick = (record, id) => {
     if (onCardClick) {
-      onCardClick(record);
+      onCardClick(record, id);
     }
   };
   const renderItem = (index, key) => {
     const item = data[index];
 
     return (
-      <div key={key} className={style.card} onClick={handleRowClick}>
+      <div
+        key={key}
+        className={style.card}
+        onClick={() => handleRowClick(item, item.CustomerID)}
+      >
         <div className={style.cardbox}>
           <div className={style.title}>Name</div>
-          <div className={style.desc}>{item.Name}</div>
+          <div className={style.desc}>{item.Name || "----"}</div>
         </div>
         <div className={style.cardbox}>
           <div className={style.title}>Email</div>
@@ -33,7 +37,7 @@ const CardView = ({ data = [], onCardClick }) => {
         </div>
         <div className={style.cardbox}>
           <div className={style.title}>AcctExec</div>
-          <div className={style.desc}>{item.AcctExec}</div>
+          <div className={style.desc}>{item.AcctExec || "-----"}</div>
         </div>
         <div className={style.cardbox}>
           <div className={style.title}>SignupDate</div>
@@ -61,7 +65,11 @@ const CardView = ({ data = [], onCardClick }) => {
       components={{
         Item: ItemContainer,
         List: ListContainer,
-        ScrollSeekPlaceholder: ({ height, width, index }) => <></>,
+        ScrollSeekPlaceholder: ({ height, width, index }) => (
+          <>
+            <div>loading</div>
+          </>
+        ),
       }}
       totalCount={data.length}
       itemContent={renderItem}

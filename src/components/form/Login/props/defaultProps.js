@@ -1,5 +1,5 @@
 export const LoginDefaultProps = {
-  EmailPlaceHolder: "Email",
+  EmailPlaceHolder: "Username",
   KeyPlaceHolder: "Password",
-  HeadingText: "Ontraport-Contacts",
+  HeadingText: "Capstone",
 };

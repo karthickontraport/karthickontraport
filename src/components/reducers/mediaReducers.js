@@ -11,7 +11,7 @@ const initialState = {
   error: null,
 };
 
-const reducer = (state = initialState, action) => {
+const mediaReducers = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_DATA_REQUEST:
       return {
@@ -36,4 +36,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default mediaReducers;

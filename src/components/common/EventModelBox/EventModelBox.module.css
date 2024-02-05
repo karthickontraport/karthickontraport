@@ -1,0 +1,22 @@
+.Container {
+  width: 40.5rem;
+  background-color: #fff;
+  border-radius: 5px;
+  gap: 1rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.title {
+  text-align: center;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #c7a566;
+}
+.label {
+  width: 9.375rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.dw100 {
+  width: 100%;
+}

@@ -25,7 +25,7 @@ export const fetchData = () => {
 
     try {
       const response = await axios.get(
-        "https://www.b2bvibe.com/capsapi/api/executives/mediacodes"
+        "https://www.goleads.com/capsapi/api/executives/mediacodes"
       );
       dispatch(fetchDataSuccess(response.data));
     } catch (error) {
