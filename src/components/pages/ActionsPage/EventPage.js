@@ -5,7 +5,11 @@ import style from "./Common.module.css";
 
 const EventPage = ({ onClose }) => {
   return (
-    <ActionsModel title="Add an Event" saveText="Add Event" onClose={onClose}>
+    <ActionsModel
+      title="Add an Event for karthick"
+      saveText="Add Event"
+      onClose={onClose}
+    >
       <EventModelBox />
     </ActionsModel>
   );
