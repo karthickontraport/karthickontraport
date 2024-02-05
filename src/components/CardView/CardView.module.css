@@ -1,0 +1,20 @@
+.card {
+  width: 18.125rem;
+  background-color: #fff;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.cardbox {
+  margin-bottom: 5px;
+}
+
+.title {
+  color: #999c9e;
+  line-height: 20px;
+}
+.desc {
+  font-size: 14px;
+}

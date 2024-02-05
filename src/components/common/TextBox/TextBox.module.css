@@ -1,0 +1,31 @@
+.textBox {
+  border-bottom: 1px solid #d8dadb;
+  transition: all 0.3s;
+  height: 35px;
+  width: 300px;
+}
+
+.input {
+  border: 0;
+  outline: 0;
+  padding: 0 10px 0 0;
+  width: 100%;
+}
+
+.active {
+  border-color: #0683df;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 16px;
+  color: #119de9;
+  cursor: pointer;
+}
+
+.icon:hover {
+  background-color: #ebedef;
+}

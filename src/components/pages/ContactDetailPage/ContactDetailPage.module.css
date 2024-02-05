@@ -1,0 +1,11 @@
+.Container {
+  gap: 10px;
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+.form {
+  gap: 30px;
+}
+.formBox {
+  width: 18.6875rem;
+}

@@ -1,0 +1,16 @@
+.Container {
+  box-sizing: border-box;
+  background-color: #e8ebee;
+  gap: 10px;
+}
+.datacontainer {
+  gap: 10px;
+}
+
+.bg {
+  background-color: #e8ebee;
+  padding: 10px 10px 0;
+}
+.gap {
+  padding: 10px 10px 0 10px;
+}

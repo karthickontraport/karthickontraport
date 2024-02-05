@@ -1,0 +1,12 @@
+.td {
+  height: 40px;
+  background-color: #fff;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.td:hover {
+  background-color: #eff2f6;
+}
+.thead {
+  background-color: #ced1d3;
+}

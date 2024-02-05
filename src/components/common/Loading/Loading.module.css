@@ -1,0 +1,78 @@
+.Container {
+  background-color: #fff;
+  border-radius: 5px;
+}
+.loader {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #2e7d32;
+  position: relative;
+  animation: flash 1s ease-in-out infinite alternate;
+}
+
+.loader::before,
+.loader::after {
+  content: "";
+  position: absolute;
+  left: -35px; /* Adjusted for 1px spacing */
+  top: 0;
+  background: #2e7d32;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  transform-origin: 35px -35px;
+  transform: rotate(45deg);
+  animation: hitL 1s ease-in-out infinite alternate;
+}
+
+.loader::after {
+  left: 35px; /* Adjusted for 1px spacing */
+  transform: rotate(-45deg);
+  transform-origin: -35px -35px;
+  animation: hitR 1s ease-in-out infinite alternate;
+}
+
+@keyframes flash {
+  0%,
+  100% {
+    background-color: #2e7d32; /* Green */
+    box-shadow: 17px 0 #2e7d32, -17px 0 #2e7d32; /* Adjusted for 1px spacing */
+  }
+  25% {
+    background-color: #ff8a65; /* Orange */
+    box-shadow: 17px 0 #ff8a65, -17px 0 #ff8a65; /* Adjusted for 1px spacing */
+  }
+  50% {
+    background-color: #263238; /* Purple */
+    box-shadow: 17px 0 #263238, -17px 0 #263238; /* Adjusted for 1px spacing */
+  }
+  75% {
+    background-color: #ff8a65; /* Orange */
+    box-shadow: 17px 0 #ff8a65, -17px 0 #ff8a65; /* Adjusted for 1px spacing */
+  }
+}
+
+@keyframes hitL {
+  0% {
+    transform: rotate(45deg);
+    background-color: #263238; /* Purple */
+  }
+  25%,
+  100% {
+    transform: rotate(0deg);
+    background-color: #ff8a65; /* Orange */
+  }
+}
+
+@keyframes hitR {
+  0%,
+  75% {
+    transform: rotate(0deg);
+    background-color: #2e7d32; /* Green */
+  }
+  100% {
+    transform: rotate(-45deg);
+    background-color: #2e7d32; /* Green */
+  }
+}

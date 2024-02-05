@@ -1,0 +1,31 @@
+.btnBox {
+  border-radius: 2px;
+}
+.btn {
+  border: 0;
+  outline: 0;
+  background: #fff;
+  padding: 5px;
+  min-width: 35px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #777879;
+  transition: all 0.3s ease;
+}
+.selected {
+  color: #fff;
+  background: #0e92e4;
+}
+.Container {
+  padding: 10px 20px 10px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.head {
+  font-size: 20px;
+}
+.viewtxt {
+  margin-right: 5px;
+  font-size: 15px;
+}

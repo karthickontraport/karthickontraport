@@ -1,0 +1,27 @@
+.Container {
+  background-color: #eef0f1;
+}
+.gap,
+.Container {
+  gap: 10px;
+}
+.lhs {
+  width: 12.5rem;
+  padding: 10px 5px 10px 13px;
+}
+.lhsitem {
+  padding: 10px 20px;
+  background: #d4dde5;
+  font-size: 18px;
+  color: #000;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.selected {
+  background: #1976d2;
+  color: #fff;
+}

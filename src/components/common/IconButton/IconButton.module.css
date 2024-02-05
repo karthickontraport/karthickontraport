@@ -1,0 +1,8 @@
+.Container {
+  border: 1px solid #dde0e3;
+  height: 35px;
+  width: 35px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #7c7d7e;
+}
