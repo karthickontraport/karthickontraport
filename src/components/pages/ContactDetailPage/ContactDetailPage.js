@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Modal, Button } from "antd";
 import { Table } from "antd";
+import { UserSwitchOutlined, DeleteOutlined } from "@ant-design/icons";
 import Skeleton from "@mui/material/Skeleton";
 import { message } from "antd";
 import { Empty } from "antd";
@@ -21,9 +22,10 @@ import NoteModel from "../../common/NoteModel/NoteModel";
 import QuickViewPage from "../QuickViewPage";
 import TaskPage from "../ActionsPage/TaskPage";
 import EventPage from "../ActionsPage/EventPage";
-import MailPage from "../ActionsPage/MailPage";
+import MailAction from "../../common/ActionsModel/MailAction";
 import TaskActions from "../../common/TaskActions/TaskActions";
 import EventActions from "../../common/EventActions/EventActions";
+import EventStatusModel from "../../common/EventActions/EventStatusModel";
 import style from "./ContactDetailPage.module.css";
 
 const ContactDetailPage = (props) => {
@@ -64,6 +66,9 @@ const ContactDetailPage = (props) => {
   );
   const [editAlertVisible, setEditAlertVisible] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [selectedTaskData, setSelectedTaskData] = useState(null);
+
+  const [openStatusModel, setOpenStatusModel] = useState(false);
 
   useEffect(() => {
     dispatch(fetchNotesData(customerId));
@@ -231,6 +236,10 @@ const ContactDetailPage = (props) => {
   const handleShowAction = () => {
     setShowActions(true);
   };
+  const onStatusClick = () => {
+    console.log("modelopen", true);
+    setOpenStatusModel(true);
+  };
   const closeActionsPage = () => {
     setShowActions(false);
   };
@@ -279,12 +288,14 @@ const ContactDetailPage = (props) => {
     { title: "Modify Event", dataIndex: "modify event", key: "modify event" },
   ];
 
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: (selectedKeys) => {
-      setSelectedRowKeys(selectedKeys);
-    },
-    showSelectAll: false,
+  const handleEditTask = (record) => {
+    console.log("selected recored", record);
+    setSelectedTaskData(record);
+    setShowActions(true);
+  };
+
+  const handleRowSelectionChange = (selectedRowKeys, selectedRows) => {
+    setSelectedRowKeys(selectedRowKeys);
   };
 
   return (
@@ -472,9 +483,16 @@ const ContactDetailPage = (props) => {
                 <Table
                   columns={columns}
                   dataSource={currentCustomerIdData}
-                  rowKey={(record) => record.subject}
                   pagination={false}
-                  rowSelection={rowSelection}
+                  rowKey={(record) => record.key}
+                  rowSelection={{
+                    type: "checkbox",
+                    onChange: handleRowSelectionChange,
+                    selectedRowKeys: selectedRowKeys,
+                  }}
+                  onRow={(record) => ({
+                    onClick: () => handleEditTask(record),
+                  })}
                 />
               ) : (
                 <Empty
@@ -492,7 +510,22 @@ const ContactDetailPage = (props) => {
             <ContactBox
               actionBtnText="Add New Event"
               handleShowNoteModel={handleEventShowAction}
-              customChildren={<EventActions />}
+              customChildren={
+                <EventActions
+                  onStatusClick={onStatusClick}
+                  placeholder="Actions"
+                  options={[
+                    {
+                      text: "Change Status",
+                      icon: <UserSwitchOutlined />,
+                    },
+                    {
+                      text: "Delete From Event",
+                      icon: <DeleteOutlined />,
+                    },
+                  ]}
+                />
+              }
               heading="Calendar"
               scroll="vertical"
               className={style.noteContainer}
@@ -516,6 +549,10 @@ const ContactDetailPage = (props) => {
           </Box>
         </Container>
       </Box>
+      <EventStatusModel
+        show={openStatusModel}
+        handleClose={() => setOpenStatusModel(false)}
+      />
       <NoteModel
         show={showNoteModel}
         handleClose={handleCloseNoteModel}
@@ -555,9 +592,14 @@ const ContactDetailPage = (props) => {
       >
         Please select only one note for editing at a time.
       </Modal>
-      {showActions && <TaskPage onClose={closeActionsPage} />}
+      {showActions && (
+        <TaskPage
+          onClose={closeActionsPage}
+          selectedTaskData={selectedTaskData}
+        />
+      )}
       {showEventActions && <EventPage onClose={closeEventActionsPage} />}
-      {showMailActions && <MailPage onClose={closeMailActionsPage} />}
+      {showMailActions && <MailAction onClose={closeMailActionsPage} />}
     </Container>
   );
 };

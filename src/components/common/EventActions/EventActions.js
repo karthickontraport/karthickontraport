@@ -1,25 +1,14 @@
 import React from "react";
-import { UserSwitchOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Flex } from "antd";
 import EventSelect from "./EventSelect";
+import EventDropdown from "./EventDropdown";
 
-const EventActions = () => {
-  const iconStyle = {
-    marginRight: "5px",
-  };
-  const iconOptions = [
-    {
-      value: "Change Status",
-      label: "Change Status",
-      icon: <UserSwitchOutlined style={iconStyle} />,
-    },
-    {
-      value: "Delete From Event",
-      label: "Delete From Event",
-      icon: <DeleteOutlined style={iconStyle} />,
-    },
-  ];
-
+const EventActions = ({
+  onEventClick,
+  onStatusClick,
+  options,
+  placeholder,
+}) => {
   const userOptions = [
     {
       value: "All Events",
@@ -32,7 +21,12 @@ const EventActions = () => {
   ];
   return (
     <Flex gap={12}>
-      <EventSelect options={iconOptions} width="11rem" initialValue="Actions" />
+      <EventDropdown
+        onStatusClick={onStatusClick}
+        onEventClick={onEventClick}
+        options={options}
+        placeholder={placeholder}
+      />
 
       <EventSelect
         options={userOptions}

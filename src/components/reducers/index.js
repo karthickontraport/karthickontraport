@@ -9,6 +9,7 @@ import addNoteReducer from "./addNoteReducer";
 import updateNoteReducer from "./updateNoteReducer";
 import removeNoteReducer from "./removeNoteReducer";
 import refReducer from "./refReducer";
+import mailReducers from "./mailReducers";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   updateReducer: updateNoteReducer,
   removeReducer: removeNoteReducer,
   refReducer: refReducer,
+  mail: mailReducers,
 });
 
 export default rootReducer;

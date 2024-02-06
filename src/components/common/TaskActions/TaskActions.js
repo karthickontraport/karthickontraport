@@ -7,33 +7,12 @@ import {
 } from "@ant-design/icons";
 import { Flex } from "antd";
 import TaskSelect from "./TaskSelect";
+import TaskDropdown from "./TaskDropdown";
 
 const TaskActions = () => {
   const iconStyle = {
     marginRight: "5px",
   };
-  const iconOptions = [
-    {
-      value: "Mark Complete",
-      label: "Mark Complete",
-      icon: <CheckOutlined style={iconStyle} />,
-    },
-    {
-      value: "Email",
-      label: "Email",
-      icon: <MailOutlined style={iconStyle} />,
-    },
-    {
-      value: "Reassign",
-      label: "Reassign",
-      icon: <UserSwitchOutlined style={iconStyle} />,
-    },
-    {
-      value: "Reschedule",
-      label: "Reschedule",
-      icon: <ReloadOutlined style={iconStyle} />,
-    },
-  ];
 
   const Options = [
     {
@@ -71,9 +50,10 @@ const TaskActions = () => {
       label: "Me",
     },
   ];
+
   return (
     <Flex gap={12}>
-      <TaskSelect options={iconOptions} width="11rem" initialValue="Actions" />
+      <TaskDropdown placeholder="Actions" />
       <TaskSelect
         options={Options}
         width="15rem"

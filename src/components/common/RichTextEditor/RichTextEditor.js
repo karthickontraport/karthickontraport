@@ -15,14 +15,13 @@ const RichTextEditor = ({ onChange, initialValue, editorHeight }) => {
     }
   };
 
-  // Define modules for font size and font color
   const modules = {
     toolbar: {
       container: [
         ["bold", "italic", "underline", "strike"],
         [{ header: [1, 2, 3, false] }],
         ["link", "image"],
-        [{ color: [] }, { background: [] }], // Font color and background color
+        [{ color: [] }, { background: [] }],
         [{ align: [] }],
         [{ list: "ordered" }, { list: "bullet" }],
         ["clean"],
