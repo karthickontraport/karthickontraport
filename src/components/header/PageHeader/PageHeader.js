@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Box } from "../../common/Layout";
 import { Input, Button, Select } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
@@ -12,6 +12,15 @@ const PageHeader = ({
   handleEditGroup,
   needActions = false,
 }) => {
+  const [groupNames, setGroupNames] = useState([]);
+
+  useEffect(() => {
+    const storedGroupNames =
+      JSON.parse(localStorage.getItem("groupNames")) || [];
+    const uniqueGroupNames = [...new Set(storedGroupNames)]; // Filter out duplicates
+    setGroupNames(uniqueGroupNames);
+  }, [groupNames]);
+
   const handleOnChange = (value) => {
     console.log(`selected ${value}`);
   };
@@ -40,28 +49,10 @@ const PageHeader = ({
                   onChange={handleOnChange}
                   onSearch={onSearch}
                   filterOption={filterOption}
-                  options={[
-                    {
-                      value: "All",
-                      label: "All",
-                    },
-                    {
-                      value: "2019 Revenue",
-                      label: "2019 Revenue",
-                    },
-                    {
-                      value: "2019 Revenue 45+ dyas in ontraport",
-                      label: "2019 Revenue 45+ dyas in ontraport",
-                    },
-                    {
-                      value: "Goleads Newsletter",
-                      label: "Goleads Newsletter",
-                    },
-                    {
-                      value: "Card View : Sales pipeline",
-                      label: "Card View : Sales pipeline",
-                    },
-                  ]}
+                  options={groupNames.map((groupName) => ({
+                    value: groupName,
+                    label: groupName,
+                  }))}
                 />
               </Box>
             </Container>

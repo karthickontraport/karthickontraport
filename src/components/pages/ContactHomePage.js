@@ -18,6 +18,7 @@ import { Result } from "antd";
 import LoadingSpin from "../common/Loading/Loading";
 import Skeleton from "@mui/material/Skeleton";
 import CriteriaPage from "./CriteriaPage/CriteriaPage";
+import TableSkeleton from "../common/CustomTable/TableSkeleton";
 import style from "./common.module.css";
 
 const CustomTable = lazy(() => import("../common/CustomTable/CustomTable"));
@@ -68,6 +69,7 @@ const ContactHomePage = ({ handleEdit }) => {
     const { CustomerID } = record;
     localStorage.setItem("currentCustomerID", CustomerID);
     navigate(`contactDetailes/${CustomerID}`);
+    document.getElementById("Lhs").style.display = "block";
   };
 
   const handleAddForm = () => {
@@ -210,7 +212,7 @@ const ContactHomePage = ({ handleEdit }) => {
               </Container>
             )}
             {success && (
-              <Suspense fallback={<Skeleton />}>
+              <Suspense fallback={<TableSkeleton />}>
                 <CustomTable
                   columns={memoizedColumns}
                   data={filteredData}

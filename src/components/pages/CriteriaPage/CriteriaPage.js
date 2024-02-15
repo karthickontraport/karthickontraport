@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Button, Flex, Tooltip, Select } from "antd";
 import {
   CopyOutlined,
@@ -10,11 +10,11 @@ import useCriteriaLogic from "../../commonReducers/useCriteriaLogic";
 import { Container, Box } from "../../common/Layout";
 import Drawer from "../../common/CustomDrawer/CustomDrawer";
 import style from "./CriteriaPage.module.css";
+
 const CriteriaPage = (props) => {
   const { title, visible, onClose, extra } = props;
   const {
     criteria,
-    groupName,
     handleFieldChange,
     handleOperatorChange,
     handleValueChange,
@@ -23,13 +23,34 @@ const CriteriaPage = (props) => {
     removeCriterion,
     copyCriterion,
     clearCriteria,
-    setGroupName,
   } = useCriteriaLogic();
+  const [groupName, setGroupName] = useState("");
+
+  useEffect(() => {
+    const defaultGroupNames = [
+      "All",
+      "2019 Revenue",
+      "2019 Revenue 45+ dyas in ontraport",
+      "Goleads Newsletter",
+      "Card View : Sales pipeline",
+    ];
+    const storedGroupNames =
+      JSON.parse(localStorage.getItem("groupNames")) || [];
+    const allGroupNames = [...defaultGroupNames, ...storedGroupNames];
+
+    localStorage.setItem("groupNames", JSON.stringify(allGroupNames));
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Group Name:", groupName);
-    console.log("Criteria:", criteria);
+    // Store group name in local storage
+    const storedGroupNames =
+      JSON.parse(localStorage.getItem("groupNames")) || [];
+    const updatedGroupNames = [...storedGroupNames, groupName];
+    localStorage.setItem("groupNames", JSON.stringify(updatedGroupNames));
+
+    // Clear group name field
+    setGroupName("");
   };
 
   const toggleCondition = (index) => {
@@ -206,7 +227,9 @@ const CriteriaPage = (props) => {
               align="center"
               style={{ height: "100%", padding: "0 1rem" }}
             >
-              <Button type="primary">Submit</Button>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
               <Button onClick={onClose}>Cancel</Button>
               <Button onClick={clearCriteria}>Clear</Button>
             </Flex>

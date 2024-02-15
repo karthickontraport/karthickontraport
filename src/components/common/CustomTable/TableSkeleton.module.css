@@ -1,0 +1,14 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+}
+
+.headerRow {
+  font-weight: bold;
+}
+
+.cell {
+  padding: 30px;
+  border-right: 1px solid #ddd;
+}

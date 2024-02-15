@@ -44,6 +44,8 @@ const AppRoutes = () => {
       console.error("Error fetching data:", error);
     }
     navigate("reactcaps/home");
+
+    document.getElementById("Lhs").style.display = "none";
   };
 
   useEffect(() => {

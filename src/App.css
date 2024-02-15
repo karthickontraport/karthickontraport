@@ -32,3 +32,6 @@ li {
 .ant-drawer-body {
   padding: 0 !important;
 }
+#Lhs {
+  display: none;
+}

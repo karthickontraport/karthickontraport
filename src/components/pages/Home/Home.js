@@ -183,10 +183,10 @@ const Home = () => {
       <Box flexible className={style.wraper}>
         <Container alignBox="row">
           {isLeftPanelExpanded ? (
-            <Box className={style.lhs}>
+            <Box className={style.lhs} id="Lhs">
               <Container alignBox="column" className={style.gap}>
                 <Link
-                  to="/reactcaps/home"
+                  to={`/reactcaps/home/contactDetailes/${customerId}`}
                   className={`${style.lhsitem} ${
                     activeTab === "contacts" && style.selected
                   }`}
@@ -241,7 +241,7 @@ const Home = () => {
             <Box className={`${style.lhs} ${style.colsWidth}`}>
               <Container alignBox="column" className={style.gap}>
                 <Link
-                  to="/reactcaps/home"
+                  to={`/reactcaps/home/contactDetailes/${customerId}`}
                   className={`${style.lhsitem} ${
                     activeTab === "contacts" && style.selected
                   }`}
